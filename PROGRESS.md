@@ -12,7 +12,7 @@ Tick items when done. Phase exit lists are also checked by the validation script
 - [ ] Schedule dates filled in once the deadline is known (`schedule.md`)
 - [x] `bash tools/check_tools.sh` run, gaps known (nmap and pandoc missing, deferred to Phase 3 / 6)
 - [x] `python tools/validate_phase0.py` shows no `[FAIL]`
-- [ ] First git commit made
+- [x] First git commit made (pushed to https://github.com/CirasBharadwaz/threat-mgmt-project)
 
 ## Phase 1: Governance
 - [ ] Not started
