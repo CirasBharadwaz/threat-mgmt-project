@@ -1,0 +1,9 @@
+asset_id,asset,type,owner,data_held,location,criticality_1to5,notes
+A-01,Web shop application,Application,Head of IT,D-01;D-02;D-03;D-04,Cloud (EU),5,Internet-facing; personal data in transit
+A-02,Customer database,Data store,Head of IT,D-01;D-02;D-03;D-04,Cloud (EU),5,Largest personal data store
+A-03,Nightly backups,Data store,Head of IT,D-01;D-02;D-03;D-04,Cloud (EU),4,Copy of A-02
+A-04,Support staff laptops,Endpoint,Head of Support,D-01;D-02,Office / remote,3,Admin access to A-02; cached customer data
+A-05,Payment provider integration,Third party,Finance Lead,D-03,External,4,Tokenised payment references only
+A-06,Email and newsletter provider,Third party,Marketing Lead,D-05,External,2,Holds newsletter consent data
+A-07,IT administrators,People,Head of IT,-,Office / remote,4,Privileged access to A-01 and A-02
+A-08,Delivery partner,Third party,Logistics Lead,D-01;D-02,External,3,Receives name and address for shipping

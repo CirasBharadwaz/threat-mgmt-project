@@ -1,0 +1,10 @@
+flowchart LR
+    C[Customer browser] -->|HTTPS| W[A-01 Web shop]
+    W --> D[(A-02 Customer database)]
+    D --> B[(A-03 Nightly backup)]
+    W -->|payment token| P[A-05 Payment provider]
+    W -->|order data| L[A-08 Delivery partner]
+    W -->|newsletter data| M[A-06 Email provider]
+    S[A-04 Support laptop] -->|support access| D
+    ADM[A-07 IT administrators] -->|privileged access| D
+    ADM -->|deploy and manage| W
