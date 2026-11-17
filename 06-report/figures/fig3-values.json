@@ -1,0 +1,16 @@
+{
+  "before": {
+    "ZAP baseline warnings (Medium+)": 2,
+    "ZAP active: High alerts": 1,
+    "Trivy Critical CVEs": 7,
+    "Live SQLi bypass succeeded": 1,
+    "Exposed paths answering 200": 3
+  },
+  "after": {
+    "ZAP baseline warnings (Medium+)": 1,
+    "ZAP active: High alerts": 0,
+    "Trivy Critical CVEs": 7,
+    "Live SQLi bypass succeeded": 0,
+    "Exposed paths answering 200": 0
+  }
+}
