@@ -9,7 +9,7 @@ is marked "not specified (no brief)" and listed under the questions for the lect
 
 - Course / lecturer: Data and Privacy (semester project); lecturer not specified (no brief)
 - Individual or group: not specified (no brief); work is currently done individually
-- Deadline (report): 2026-11-17 (Tuesday), exact time to be confirmed
+- Deadline (report): 2026-11-19 (Thursday), exact time to be confirmed (moved from 2026-11-17, see decision log)
 - Deadline (presentation, if any): not specified (no brief)
 - Page / word limit: not specified (no brief)
 - Required frameworks or standards: not specified (no brief); assumed ISO/IEC 27001:2022, NIST CSF 2.0 and GDPR/BDSG (see decision log, to be confirmed)
@@ -18,4 +18,4 @@ is marked "not specified (no brief)" and listed under the questions for the lect
 - Grading criteria (copy the exact wording): not specified (no brief)
 - Citation style: not specified (no brief)
 - Submission format (PDF / repo / both): not specified (no brief)
-- Questions to ask the lecturer: (1) exact submission time on 2026-11-17; (2) page or word limit; (3) submission format (PDF, repository or both); (4) required frameworks and whether ISO/IEC 27001:2022, NIST CSF 2.0 and GDPR/BDSG are acceptable; (5) grading criteria; (6) citation style; (7) whether a presentation is required and when; (8) individual or group work; (9) whether a technical lab is expected or a desk-based analysis is enough
+- Questions to ask the lecturer: (1) exact submission time on 2026-11-19; (2) page or word limit; (3) submission format (PDF, repository or both); (4) required frameworks and whether ISO/IEC 27001:2022, NIST CSF 2.0 and GDPR/BDSG are acceptable; (5) grading criteria; (6) citation style; (7) whether a presentation is required and when; (8) individual or group work; (9) whether a technical lab is expected or a desk-based analysis is enough
