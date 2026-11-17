@@ -1,0 +1,43 @@
+{
+  "time_utc": "2026-11-17T18:10:28Z",
+  "change": "CA-25: emergency block narrowed to non-POST methods; CA-23 reset re-applied after the Docker restart",
+  "tests": [
+    {
+      "test": "customer sign-up POST /api/Users (synthetic lab user)",
+      "http_status": 201,
+      "expected": 201,
+      "pass": true
+    },
+    {
+      "test": "new customer can log in",
+      "http_status": 200,
+      "expected": 200,
+      "pass": true
+    },
+    {
+      "test": "read user data GET /api/Users",
+      "http_status": 403,
+      "expected": 403,
+      "pass": true
+    },
+    {
+      "test": "read user data GET /api/Users/1",
+      "http_status": 403,
+      "expected": 403,
+      "pass": true
+    },
+    {
+      "test": "read user data GET /rest/user/authentication-details/",
+      "http_status": 403,
+      "expected": 403,
+      "pass": true
+    },
+    {
+      "test": "phished support password still refused (CA-23)",
+      "http_status": 401,
+      "expected": 401,
+      "pass": true
+    }
+  ],
+  "all_pass": true
+}
