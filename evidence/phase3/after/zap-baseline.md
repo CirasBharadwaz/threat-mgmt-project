@@ -29,7 +29,6 @@ ZAP by [Checkmarx](https://checkmarx.com/).
 | Info | Informational | http://juice-shop:3000 | Percentage of endpoints with content type text/plain | 8 % |
 | Info | Informational | http://juice-shop:3000 | Percentage of endpoints with method GET | 100 % |
 | Info | Informational | http://juice-shop:3000 | Count of total endpoints | 12    |
-| Info | Informational | http://juice-shop:3000 | Percentage of slow responses | 7 % |
 
 
 
@@ -66,21 +65,21 @@ Content Security Policy (CSP) is an added layer of security that helps to detect
   * Method: `GET`
   * Parameter: `Content-Security-Policy`
   * Attack: ``
-  * Evidence: `default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'`
+  * Evidence: `default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com 'sha256-2ADpmZIga9zdrCfzZ7IWyavasltpcKCkxomklfMTCG0=' 'sha256-LMY6wYoFV9I4wWzxaq1N/dTpl4iurQktw706UCHK3vM='; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'`
   * Other Info: `style-src includes unsafe-inline.`
 * URL: http://juice-shop:3000/ftp
   * Node Name: `http://juice-shop:3000/ftp`
   * Method: `GET`
   * Parameter: `Content-Security-Policy`
   * Attack: ``
-  * Evidence: `default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'`
+  * Evidence: `default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com 'sha256-2ADpmZIga9zdrCfzZ7IWyavasltpcKCkxomklfMTCG0=' 'sha256-LMY6wYoFV9I4wWzxaq1N/dTpl4iurQktw706UCHK3vM='; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'`
   * Other Info: `style-src includes unsafe-inline.`
 * URL: http://juice-shop:3000/sitemap.xml
   * Node Name: `http://juice-shop:3000/sitemap.xml`
   * Method: `GET`
   * Parameter: `Content-Security-Policy`
   * Attack: ``
-  * Evidence: `default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'`
+  * Evidence: `default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com 'sha256-2ADpmZIga9zdrCfzZ7IWyavasltpcKCkxomklfMTCG0=' 'sha256-LMY6wYoFV9I4wWzxaq1N/dTpl4iurQktw706UCHK3vM='; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'`
   * Other Info: `style-src includes unsafe-inline.`
 
 
