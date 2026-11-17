@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.98 scan initiated Tue Nov 17 17:19:22 2026 as: /usr/bin/nmap -sV -sC -p- -T4 -oA /out/nmap juice-shop -->
+<nmaprun scanner="nmap" args="/usr/bin/nmap -sV -sC -p- -T4 -oA /out/nmap juice-shop" start="1794935962" startstr="Tue Nov 17 17:19:22 2026" version="7.98" xmloutputversion="1.05">
+<scaninfo type="syn" protocol="tcp" numservices="65535" services="1-65535"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="172.22.0.2" addrtype="ipv4"/>
+<address addr="F2:61:9F:C6:2B:82" addrtype="mac"/>
+<hostnames>
+<hostname name="juice-shop" type="user"/>
+</hostnames>
+</hosthint>
+<host starttime="1794935964" endtime="1794935984"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="172.22.0.2" addrtype="ipv4"/>
+<address addr="F2:61:9F:C6:2B:82" addrtype="mac"/>
+<hostnames>
+<hostname name="juice-shop" type="user"/>
+<hostname name="shop-proxy.tm-lab" type="PTR"/>
+</hostnames>
+<ports><extraports state="closed" count="65534">
+<extrareasons reason="reset" count="65534" proto="tcp" ports="1-2999,3001-65535"/>
+</extraports>
+<port protocol="tcp" portid="3000"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="http" product="nginx" method="probed" conf="10"><cpe>cpe:/a:igor_sysoev:nginx</cpe></service><script id="http-robots.txt" output="1 disallowed entry &#xa;/ftp"/><script id="http-title" output="OWASP Juice Shop"><elem key="title">OWASP Juice Shop</elem>
+</script></port>
+</ports>
+<times srtt="11" rttvar="0" to="100000"/>
+</host>
+<runstats><finished time="1794935984" timestr="Tue Nov 17 17:19:44 2026" summary="Nmap done at Tue Nov 17 17:19:44 2026; 1 IP address (1 host up) scanned in 23.41 seconds" elapsed="23.41" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

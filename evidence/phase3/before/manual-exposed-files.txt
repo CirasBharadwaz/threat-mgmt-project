@@ -1,0 +1,31 @@
+# Manual check of exposed files, 2026-11-17T17:14:56Z, target http://127.0.0.1:3000 (lab Juice Shop only)
+## GET /robots.txt
+HTTP/1.1 200 OK
+
+User-agent: *
+Disallow: /ftp
+## GET /ftp (directory listing, first file names)
+HTTP/1.1 200 OK
+title="quarantine"
+title="acquisitions.md"
+title="announcement_encrypted.md"
+title="coupons_2013.md.bak"
+title="eastere.gg"
+title="encrypt.pyc"
+title="incident-support.kdbx"
+title="legal.md"
+title="package-lock.json.bak"
+title="package.json.bak"
+title="suspicious_errors.yml"
+## GET /ftp/acquisitions.md (first lines)
+HTTP/1.1 200 OK
+# Planned Acquisitions
+
+> This document is confidential! Do not distribute!
+
+Our company plans to acquire several competitors within the next year.
+This will have a significant stock market impact as we will elaborate in
+## GET /support/logs (access log listing)
+HTTP/1.1 200 OK
+title="access.log.2026-11-17"
+title="audit.json"

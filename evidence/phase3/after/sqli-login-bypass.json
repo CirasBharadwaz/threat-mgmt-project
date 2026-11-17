@@ -1,0 +1,26 @@
+{
+  "time_utc": "2026-11-17T17:23:05Z",
+  "target": "http://127.0.0.1:3000/rest/user/login",
+  "attempts": [
+    {
+      "attempt": "normal login, wrong password",
+      "request_body": {
+        "email": "nobody@example.invalid",
+        "password": "wrong"
+      },
+      "http_status": 401,
+      "response_excerpt": "Invalid email or password.",
+      "verdict": "rejected as expected"
+    },
+    {
+      "attempt": "SQL injection login bypass",
+      "request_body": {
+        "email": "' OR 1=1--",
+        "password": "x"
+      },
+      "http_status": 401,
+      "response_excerpt": "Invalid email or password.",
+      "verdict": "blocked"
+    }
+  ]
+}

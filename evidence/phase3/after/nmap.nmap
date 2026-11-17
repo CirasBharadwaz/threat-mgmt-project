@@ -1,0 +1,14 @@
+# Nmap 7.98 scan initiated Tue Nov 17 17:19:22 2026 as: /usr/bin/nmap -sV -sC -p- -T4 -oA /out/nmap juice-shop
+Nmap scan report for juice-shop (172.22.0.2)
+Host is up (0.000011s latency).
+rDNS record for 172.22.0.2: shop-proxy.tm-lab
+Not shown: 65534 closed tcp ports (reset)
+PORT     STATE SERVICE VERSION
+3000/tcp open  http    nginx
+| http-robots.txt: 1 disallowed entry 
+|_/ftp
+|_http-title: OWASP Juice Shop
+MAC Address: F2:61:9F:C6:2B:82 (Unknown)
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Tue Nov 17 17:19:44 2026 -- 1 IP address (1 host up) scanned in 23.41 seconds

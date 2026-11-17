@@ -1,0 +1,3 @@
+juice-shop:3000       REACHABLE
+1.1.1.1:443 (internet) blocked (OSError)
+host.docker.internal:3000 (host) blocked (gaierror)

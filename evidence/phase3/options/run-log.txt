@@ -1,0 +1,60 @@
+2026-11-17T17:16:48Z  == step fix-options (options)
+2026-11-17T17:16:48Z  docker run --rm --network tm-lab --entrypoint python3 zaproxy/zap-stable -c import json, urllib.request, urllib.error, sys
+targets = json.loads(sys.argv[1]); out = []
+for label, base in targets.items():
+    for name, body in (('SQL injection login bypass', {'email': "' OR 1=1--", 'password': 'x'}),
+                       ('legitimate login, wrong password', {'email': 'jim@juice-sh.op', 'password': 'wrong'})):
+        req = urllib.request.Request(base + '/rest/user/login', data=json.dumps(body).encode(),
+                                     method='POST', headers={'Content-Type': 'application/json'})
+        try:
+            r = urllib.request.urlopen(req, timeout=15); code, text = r.status, r.read().decode()
+        except urllib.error.HTTPError as e:
+            code, text = e.code, e.read().decode('utf-8', 'replace')
+        except Exception as e:
+            code, text = None, repr(e)
+        token = 'authentication' in text and 'token' in text
+        out.append({'option': label, 'url': base + '/rest/user/login', 'request': name,
+                    'http_status': code, 'token_issued': token, 'excerpt': text[:160]})
+print(json.dumps(out, indent=2))
+ {"control: unpatched app, no protection": "http://juice-shop:3000", "option A: hardening layer (ModSecurity CRS WAF) in front of the unpatched app": "http://waf-test:8080", "option B: patched login route (bound parameters), no WAF": "http://app-patched:3000"}
+2026-11-17T17:16:57Z    exit code 0
+2026-11-17T17:16:57Z    control: unpatched app, no protection | SQL injection login bypass: HTTP 200, token issued: True
+2026-11-17T17:16:57Z    control: unpatched app, no protection | legitimate login, wrong password: HTTP 401, token issued: False
+2026-11-17T17:16:57Z    option A: hardening layer (ModSecurity CRS WAF) in front of the unpatched app | SQL injection login bypass: HTTP 403, token issued: False
+2026-11-17T17:16:57Z    option A: hardening layer (ModSecurity CRS WAF) in front of the unpatched app | legitimate login, wrong password: HTTP 401, token issued: False
+2026-11-17T17:16:57Z    option B: patched login route (bound parameters), no WAF | SQL injection login bypass: HTTP 401, token issued: False
+2026-11-17T17:16:57Z    option B: patched login route (bound parameters), no WAF | legitimate login, wrong password: HTTP 401, token issued: False
+2026-11-17T17:17:11Z  == step fix-options (options)
+2026-11-17T17:17:11Z  docker run --rm --network tm-lab --entrypoint python3 zaproxy/zap-stable -c import json, urllib.request, urllib.error, sys
+targets = json.loads(sys.argv[1]); out = []
+for label, base in targets.items():
+    for name, body in (('SQL injection login bypass', {'email': "' OR 1=1--", 'password': 'x'}),
+                       ('SQL injection variant (comment only)', {'email': "admin@juice-sh.op'--", 'password': 'x'}),
+                       ('legitimate login, wrong password', {'email': 'jim@juice-sh.op', 'password': 'wrong'}),
+                       ('legitimate login, correct password (lab user)', {'email': 'jim@juice-sh.op', 'password': 'ncc-1701'})):
+        req = urllib.request.Request(base + '/rest/user/login', data=json.dumps(body).encode(),
+                                     method='POST', headers={'Content-Type': 'application/json'})
+        try:
+            r = urllib.request.urlopen(req, timeout=15); code, text = r.status, r.read().decode()
+        except urllib.error.HTTPError as e:
+            code, text = e.code, e.read().decode('utf-8', 'replace')
+        except Exception as e:
+            code, text = None, repr(e)
+        token = 'authentication' in text and 'token' in text
+        out.append({'option': label, 'url': base + '/rest/user/login', 'request': name,
+                    'http_status': code, 'token_issued': token, 'excerpt': text[:160]})
+print(json.dumps(out, indent=2))
+ {"control: unpatched app, no protection": "http://juice-shop:3000", "option A: hardening layer (ModSecurity CRS WAF) in front of the unpatched app": "http://waf-test:8080", "option B: patched login route (bound parameters), no WAF": "http://app-patched:3000"}
+2026-11-17T17:17:48Z    exit code 0
+2026-11-17T17:17:48Z    control: unpatched app, no protection | SQL injection login bypass: HTTP 200, token issued: True
+2026-11-17T17:17:48Z    control: unpatched app, no protection | SQL injection variant (comment only): HTTP 200, token issued: True
+2026-11-17T17:17:48Z    control: unpatched app, no protection | legitimate login, wrong password: HTTP 401, token issued: False
+2026-11-17T17:17:48Z    control: unpatched app, no protection | legitimate login, correct password (lab user): HTTP 200, token issued: True
+2026-11-17T17:17:48Z    option A: hardening layer (ModSecurity CRS WAF) in front of the unpatched app | SQL injection login bypass: HTTP 403, token issued: False
+2026-11-17T17:17:48Z    option A: hardening layer (ModSecurity CRS WAF) in front of the unpatched app | SQL injection variant (comment only): HTTP 403, token issued: False
+2026-11-17T17:17:48Z    option A: hardening layer (ModSecurity CRS WAF) in front of the unpatched app | legitimate login, wrong password: HTTP 401, token issued: False
+2026-11-17T17:17:48Z    option A: hardening layer (ModSecurity CRS WAF) in front of the unpatched app | legitimate login, correct password (lab user): HTTP 200, token issued: True
+2026-11-17T17:17:48Z    option B: patched login route (bound parameters), no WAF | SQL injection login bypass: HTTP 401, token issued: False
+2026-11-17T17:17:48Z    option B: patched login route (bound parameters), no WAF | SQL injection variant (comment only): HTTP 401, token issued: False
+2026-11-17T17:17:48Z    option B: patched login route (bound parameters), no WAF | legitimate login, wrong password: HTTP 401, token issued: False
+2026-11-17T17:17:48Z    option B: patched login route (bound parameters), no WAF | legitimate login, correct password (lab user): HTTP 200, token issued: True

@@ -1,0 +1,6 @@
+# Manual check of exposed files, 2026-11-17T17:23:20Z, target http://127.0.0.1:3000 (lab, after fix)
+GET /robots.txt -> HTTP 200
+GET /ftp -> HTTP 403
+GET /ftp/acquisitions.md -> HTTP 403
+GET /support/logs -> HTTP 403
+GET /encryptionkeys -> HTTP 403

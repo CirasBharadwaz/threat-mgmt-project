@@ -1,0 +1,57 @@
+2026-11-17T17:18:41Z  == step isolation (after)
+2026-11-17T17:18:41Z  docker run --rm --network tm-lab --entrypoint python3 zaproxy/zap-stable -c import socket
+def probe(host, port):
+    try:
+        socket.create_connection((host, port), timeout=4).close(); return 'REACHABLE'
+    except Exception as e:
+        return 'blocked (' + type(e).__name__ + ')'
+print('juice-shop:3000      ', probe('juice-shop', 3000))
+print('1.1.1.1:443 (internet)', probe('1.1.1.1', 443))
+print('host.docker.internal:3000 (host)', probe('host.docker.internal', 3000))
+
+2026-11-17T17:19:03Z    exit code 0, output saved to network-isolation.txt
+2026-11-17T17:19:03Z  == step nmap (after)
+2026-11-17T17:19:03Z  docker run --rm --network tm-lab -v <project-root>\evidence\phase3\after:/out instrumentisto/nmap:latest -sV -sC -p- -T4 -oA /out/nmap juice-shop
+2026-11-17T17:20:27Z    exit code 0, output saved to nmap-console.txt
+2026-11-17T17:20:27Z  == step trivy (after)
+2026-11-17T17:20:27Z  docker run --rm -v //var/run/docker.sock:/var/run/docker.sock -v <project-root>\..\.trivy-cache:/root/.cache -v <project-root>\evidence\phase3\after:/out aquasec/trivy:latest --version
+2026-11-17T17:20:36Z    exit code 0, output saved to trivy-version.txt
+2026-11-17T17:20:36Z  docker run --rm -v //var/run/docker.sock:/var/run/docker.sock -v <project-root>\..\.trivy-cache:/root/.cache -v <project-root>\evidence\phase3\after:/out aquasec/trivy:latest image --scanners vuln --timeout 20m --no-progress --format json -o /out/trivy.json shopnova/juice-shop-patched:ca-06
+2026-11-17T17:21:02Z    exit code 0, output saved to trivy-console.txt
+2026-11-17T17:21:02Z  docker run --rm -v //var/run/docker.sock:/var/run/docker.sock -v <project-root>\..\.trivy-cache:/root/.cache -v <project-root>\evidence\phase3\after:/out aquasec/trivy:latest convert --format table -o /out/trivy-table.txt /out/trivy.json
+2026-11-17T17:21:11Z    exit code 0
+2026-11-17T17:21:11Z  == step zap-baseline (after)
+2026-11-17T17:21:11Z  docker run --rm --network tm-lab -v <project-root>\evidence\phase3\after:/zap/wrk:rw zaproxy/zap-stable zap-baseline.py -t http://juice-shop:3000 -J zap-baseline.json -r zap-baseline.html -w zap-baseline.md -I -z -silent
+2026-11-17T17:23:05Z    exit code 0, output saved to zap-baseline-console.txt
+2026-11-17T17:23:05Z  == step sqli (after)
+2026-11-17T17:23:05Z    normal login, wrong password: HTTP 401 -> rejected as expected
+2026-11-17T17:23:05Z    SQL injection login bypass: HTTP 401 -> blocked
+2026-11-17T17:23:19Z  == step zap-active (after)
+2026-11-17T17:23:19Z  docker run --rm --network tm-lab -v <project-root>\evidence\phase3\after:/zap/wrk:rw -v <project-root>\03-vulnerability\lab:/lab:ro --entrypoint python3 zaproxy/zap-stable /lab/zap_login_ascan.py http://juice-shop:3000
+2026-11-17T17:24:25Z  nginx-hardening.conf tightened (headers at server level incl. 403; no scheme wildcards) and reloaded; zap-baseline re-run
+2026-11-17T17:24:25Z  == step zap-baseline (after)
+2026-11-17T17:24:25Z  docker run --rm --network tm-lab -v <project-root>\evidence\phase3\after:/zap/wrk:rw zaproxy/zap-stable zap-baseline.py -t http://juice-shop:3000 -J zap-baseline.json -r zap-baseline.html -w zap-baseline.md -I -z -silent
+2026-11-17T17:27:48Z    exit code 0, output saved to zap-baseline-console.txt
+2026-11-17T17:28:18Z    exit code 0, output saved to zap-active-console.txt
+2026-11-17T17:35:45Z  lab pre-check for Phase 4 (support login + admin endpoints) done by the operator; app and proxy logs saved to app-logs/; containers recreated for clean Phase 4 logs
+2026-11-17T17:47:39Z  greenbone: waiting for the feed (cutoff 20:30 local time)
+2026-11-17T18:07:44Z  greenbone: previous wait script ended with the Claude session (Docker Desktop had stopped); Docker restarted at 18:04 UTC; wait script restarted
+2026-11-17T18:07:47Z  greenbone: waiting for the feed (cutoff 20:30 local time)
+2026-11-17T18:21:57Z  greenbone: feed ready; target = lab shop on tm-lab 172.22.0.4, port T:3000 only
+2026-11-17T18:22:10Z  greenbone: scan started: task 8ec25f53-892f-4536-8bad-c6046568e57b, report 098aa6a3-0dc6-4997-a220-100ad0798735
+2026-11-17T18:23:18Z  greenbone: scan finished with status Done
+2026-11-17T18:23:22Z  greenbone: report saved: 0 results (greenbone-report.xml, greenbone-results.txt)
+2026-11-17T18:25:50Z  greenbone: scan 098aa6a3 at 18:22 was empty (27 s, no ports): ospd-openvas log shows 'OpenVAS Scanner failed to load VTs' (4 attempts 18:05-18:12). Restarting ospd-openvas once to retry VT loading
+2026-11-17T18:28:03Z  greenbone: VTs loaded after restart ('VTs were up to date', feed 202611170550); run 1 files renamed greenbone-run1-empty-*; starting run 2
+2026-11-17T18:28:04Z  greenbone: waiting for the feed (cutoff 20:30 local time)
+2026-11-17T18:28:11Z  greenbone: feed ready; target = lab shop on tm-lab 172.22.0.4, port T:3000 only
+2026-11-17T18:28:16Z  greenbone: create_target failed: <create_target_response status="400" status_text="Target exists already"/>
+ Container greenbone-community-edition-vulnerability-tests-1 Running 
+ Container greenbone-community-edition-cert-bund-data-1
+2026-11-17T18:29:04Z  greenbone: run 2 failed (target name already existed); names made unique per run; starting run 3
+2026-11-17T18:29:04Z  greenbone: waiting for the feed (cutoff 20:30 local time)
+2026-11-17T18:29:12Z  greenbone: feed ready; target = lab shop on tm-lab 172.22.0.4, port T:3000 only
+2026-11-17T18:29:26Z  greenbone: scan started: task b589391d-22b5-49e5-a1c3-f4d4df6f38b4, report 5d91abb8-a9e3-4079-9302-5602d7fdcbc7
+2026-11-17T18:30:35Z  greenbone: scan finished with status Done
+2026-11-17T18:30:39Z  greenbone: report saved: 1 results (greenbone-report.xml, greenbone-results.txt)
+2026-11-17T18:31:31Z  greenbone: run 3 (30 s) reached the host (ICMP OS detection 'Linux Kernel', VT 1.3.6.1.4.1.25623.1.0.105937) but did not detect or test port 3000; no vulnerability results. Decision: no further runs; recorded as a limitation (phase3-summary.md section 6)

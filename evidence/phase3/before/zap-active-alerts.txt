@@ -1,0 +1,4 @@
+High          SQL Injection | POST http://juice-shop:3000/rest/user/login | param=email | CWE-89 | pluginId=40018
+Informational Authentication Request Identified | POST http://juice-shop:3000/rest/user/login | param=email | CWE--1 | pluginId=10111
+Medium        Content Security Policy (CSP) Header Not Set | POST http://juice-shop:3000/rest/user/login | param= | CWE-693 | pluginId=10038
+Medium        Cross-Domain Misconfiguration | POST http://juice-shop:3000/rest/user/login | param= | CWE-264 | pluginId=10098

@@ -1,0 +1,7 @@
+ZAP version 2.17.0
+Seed request answered with HTTP 401 (expected 401 for a wrong password)
+Sites tree: ['http://juice-shop:3000', 'http://juice-shop:3000/rest', 'http://juice-shop:3000/rest/user', 'http://juice-shop:3000/rest/user/login']
+Active scan id 0
+Active scan finished
+Informational Authentication Request Identified | POST http://juice-shop:3000/rest/user/login | param=email | CWE--1 | pluginId=10111
+Medium        CSP: style-src unsafe-inline | POST http://juice-shop:3000/rest/user/login | param=Content-Security-Policy | CWE-693 | pluginId=10055

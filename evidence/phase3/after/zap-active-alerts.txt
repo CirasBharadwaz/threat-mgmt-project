@@ -1,0 +1,2 @@
+Informational Authentication Request Identified | POST http://juice-shop:3000/rest/user/login | param=email | CWE--1 | pluginId=10111
+Medium        CSP: style-src unsafe-inline | POST http://juice-shop:3000/rest/user/login | param=Content-Security-Policy | CWE-693 | pluginId=10055

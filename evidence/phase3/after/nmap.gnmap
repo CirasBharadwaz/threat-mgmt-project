@@ -1,0 +1,4 @@
+# Nmap 7.98 scan initiated Tue Nov 17 17:19:22 2026 as: /usr/bin/nmap -sV -sC -p- -T4 -oA /out/nmap juice-shop
+Host: 172.22.0.2 (shop-proxy.tm-lab)	Status: Up
+Host: 172.22.0.2 (shop-proxy.tm-lab)	Ports: 3000/open/tcp//http//nginx/	Ignored State: closed (65534)
+# Nmap done at Tue Nov 17 17:19:44 2026 -- 1 IP address (1 host up) scanned in 23.41 seconds

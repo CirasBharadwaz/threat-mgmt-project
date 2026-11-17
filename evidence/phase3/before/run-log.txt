@@ -1,0 +1,41 @@
+2026-11-17T16:39:33Z  == step nmap (before)
+2026-11-17T16:39:33Z  docker run --rm --network tm-lab -v <project-root>\evidence\phase3\before:/out instrumentisto/nmap:latest -sV -sC -p- -T4 -oA /out/nmap juice-shop
+2026-11-17T16:40:48Z    exit code 0, output saved to nmap-console.txt
+2026-11-17T16:41:01Z  == step trivy (before)
+2026-11-17T16:41:01Z  docker run --rm -v //var/run/docker.sock:/var/run/docker.sock -v <project-root>\..\.trivy-cache:/root/.cache -v <project-root>\evidence\phase3\before:/out aquasec/trivy:latest --version
+2026-11-17T16:41:24Z    exit code 0, output saved to trivy-version.txt
+2026-11-17T16:41:24Z  docker run --rm -v //var/run/docker.sock:/var/run/docker.sock -v <project-root>\..\.trivy-cache:/root/.cache -v <project-root>\evidence\phase3\before:/out aquasec/trivy:latest image --scanners vuln --format json -o /out/trivy.json bkimminich/juice-shop:latest
+2026-11-17T16:47:33Z    exit code 1, output saved to trivy-console.txt
+2026-11-17T16:47:33Z  docker run --rm -v //var/run/docker.sock:/var/run/docker.sock -v <project-root>\..\.trivy-cache:/root/.cache -v <project-root>\evidence\phase3\before:/out aquasec/trivy:latest convert --format table -o /out/trivy-table.txt /out/trivy.json
+2026-11-17T16:47:43Z    exit code 1
+2026-11-17T16:48:20Z  == step trivy (before)
+2026-11-17T16:48:20Z  docker run --rm -v //var/run/docker.sock:/var/run/docker.sock -v <project-root>\..\.trivy-cache:/root/.cache -v <project-root>\evidence\phase3\before:/out aquasec/trivy:latest --version
+2026-11-17T16:48:30Z    exit code 0, output saved to trivy-version.txt
+2026-11-17T16:48:30Z  docker run --rm -v //var/run/docker.sock:/var/run/docker.sock -v <project-root>\..\.trivy-cache:/root/.cache -v <project-root>\evidence\phase3\before:/out aquasec/trivy:latest image --scanners vuln --timeout 20m --no-progress --format json -o /out/trivy.json bkimminich/juice-shop:latest
+2026-11-17T16:52:00Z    exit code 0, output saved to trivy-console.txt
+2026-11-17T16:52:00Z  docker run --rm -v //var/run/docker.sock:/var/run/docker.sock -v <project-root>\..\.trivy-cache:/root/.cache -v <project-root>\evidence\phase3\before:/out aquasec/trivy:latest convert --format table -o /out/trivy-table.txt /out/trivy.json
+2026-11-17T16:52:07Z    exit code 0
+2026-11-17T16:52:15Z  == step isolation (before)
+2026-11-17T16:52:15Z  docker run --rm --network tm-lab --entrypoint python3 zaproxy/zap-stable -c import socket
+def probe(host, port):
+    try:
+        socket.create_connection((host, port), timeout=4).close(); return 'REACHABLE'
+    except Exception as e:
+        return 'blocked (' + type(e).__name__ + ')'
+print('juice-shop:3000      ', probe('juice-shop', 3000))
+print('1.1.1.1:443 (internet)', probe('1.1.1.1', 443))
+print('host.docker.internal:3000 (host)', probe('host.docker.internal', 3000))
+
+2026-11-17T16:52:25Z    exit code 0, output saved to network-isolation.txt
+2026-11-17T16:52:25Z  == step zap-baseline (before)
+2026-11-17T16:52:25Z  docker run --rm --network tm-lab -v <project-root>\evidence\phase3\before:/zap/wrk:rw zaproxy/zap-stable zap-baseline.py -t http://juice-shop:3000 -J zap-baseline.json -r zap-baseline.html -w zap-baseline.md -I -z -silent
+2026-11-17T16:58:20Z    exit code 0, output saved to zap-baseline-console.txt
+2026-11-17T16:58:28Z  == step zap-active (before)
+2026-11-17T16:58:28Z  docker run --rm --network tm-lab -v <project-root>\evidence\phase3\before:/zap/wrk:rw -v <project-root>\03-vulnerability\lab:/lab:ro --entrypoint python3 zaproxy/zap-stable /lab/zap_login_ascan.py http://juice-shop:3000
+2026-11-17T16:59:34Z    exit code 1, output saved to zap-active-console.txt
+2026-11-17T17:00:16Z  == step zap-active (before)
+2026-11-17T17:00:16Z  docker run --rm --network tm-lab -v <project-root>\evidence\phase3\before:/zap/wrk:rw -v <project-root>\03-vulnerability\lab:/lab:ro --entrypoint python3 zaproxy/zap-stable /lab/zap_login_ascan.py http://juice-shop:3000
+2026-11-17T17:15:07Z    exit code 0, output saved to zap-active-console.txt
+2026-11-17T17:16:23Z  == step sqli (before)
+2026-11-17T17:16:39Z    normal login, wrong password: HTTP 401 -> rejected as expected
+2026-11-17T17:16:40Z    SQL injection login bypass: HTTP 200 -> BYPASS SUCCEEDED

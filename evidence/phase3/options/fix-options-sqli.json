@@ -1,0 +1,98 @@
+[
+  {
+    "option": "control: unpatched app, no protection",
+    "url": "http://juice-shop:3000/rest/user/login",
+    "request": "SQL injection login bypass",
+    "http_status": 200,
+    "token_issued": true,
+    "excerpt": "{\"authentication\":{\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.[redacted]"
+  },
+  {
+    "option": "control: unpatched app, no protection",
+    "url": "http://juice-shop:3000/rest/user/login",
+    "request": "SQL injection variant (comment only)",
+    "http_status": 200,
+    "token_issued": true,
+    "excerpt": "{\"authentication\":{\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.[redacted]"
+  },
+  {
+    "option": "control: unpatched app, no protection",
+    "url": "http://juice-shop:3000/rest/user/login",
+    "request": "legitimate login, wrong password",
+    "http_status": 401,
+    "token_issued": false,
+    "excerpt": "Invalid email or password."
+  },
+  {
+    "option": "control: unpatched app, no protection",
+    "url": "http://juice-shop:3000/rest/user/login",
+    "request": "legitimate login, correct password (lab user)",
+    "http_status": 200,
+    "token_issued": true,
+    "excerpt": "{\"authentication\":{\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.[redacted]"
+  },
+  {
+    "option": "option A: hardening layer (ModSecurity CRS WAF) in front of the unpatched app",
+    "url": "http://waf-test:8080/rest/user/login",
+    "request": "SQL injection login bypass",
+    "http_status": 403,
+    "token_issued": false,
+    "excerpt": "<html>\r\n<head><title>403 Forbidden</title></head>\r\n<body>\r\n<center><h1>403 Forbidden</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n"
+  },
+  {
+    "option": "option A: hardening layer (ModSecurity CRS WAF) in front of the unpatched app",
+    "url": "http://waf-test:8080/rest/user/login",
+    "request": "SQL injection variant (comment only)",
+    "http_status": 403,
+    "token_issued": false,
+    "excerpt": "<html>\r\n<head><title>403 Forbidden</title></head>\r\n<body>\r\n<center><h1>403 Forbidden</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n"
+  },
+  {
+    "option": "option A: hardening layer (ModSecurity CRS WAF) in front of the unpatched app",
+    "url": "http://waf-test:8080/rest/user/login",
+    "request": "legitimate login, wrong password",
+    "http_status": 401,
+    "token_issued": false,
+    "excerpt": "Invalid email or password."
+  },
+  {
+    "option": "option A: hardening layer (ModSecurity CRS WAF) in front of the unpatched app",
+    "url": "http://waf-test:8080/rest/user/login",
+    "request": "legitimate login, correct password (lab user)",
+    "http_status": 200,
+    "token_issued": true,
+    "excerpt": "{\"authentication\":{\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.[redacted]"
+  },
+  {
+    "option": "option B: patched login route (bound parameters), no WAF",
+    "url": "http://app-patched:3000/rest/user/login",
+    "request": "SQL injection login bypass",
+    "http_status": 401,
+    "token_issued": false,
+    "excerpt": "Invalid email or password."
+  },
+  {
+    "option": "option B: patched login route (bound parameters), no WAF",
+    "url": "http://app-patched:3000/rest/user/login",
+    "request": "SQL injection variant (comment only)",
+    "http_status": 401,
+    "token_issued": false,
+    "excerpt": "Invalid email or password."
+  },
+  {
+    "option": "option B: patched login route (bound parameters), no WAF",
+    "url": "http://app-patched:3000/rest/user/login",
+    "request": "legitimate login, wrong password",
+    "http_status": 401,
+    "token_issued": false,
+    "excerpt": "Invalid email or password."
+  },
+  {
+    "option": "option B: patched login route (bound parameters), no WAF",
+    "url": "http://app-patched:3000/rest/user/login",
+    "request": "legitimate login, correct password (lab user)",
+    "http_status": 200,
+    "token_issued": true,
+    "excerpt": "{\"authentication\":{\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.[redacted]"
+  }
+]
