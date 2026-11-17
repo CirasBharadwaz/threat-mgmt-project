@@ -131,7 +131,10 @@ def main():
     before = len(hits)
     scan_text("git history (committed content)", hist, secrets, hits)
     hist_hits = hits[before:]
-    hits = hits[:before] + [h for h in hist_hits if h[0] in ("HIGH", "MEDIUM")]
+    # report only history findings that are NOT also in the current files (committed copies of
+    # current content would otherwise be counted twice); these are values that exist only in history
+    current = {(h[1], h[4]) for h in hits[:before]}
+    hits = hits[:before] + [h for h in hist_hits if h[0] in ("HIGH", "MEDIUM") and (h[1], h[4]) not in current]
     order = {"HIGH": 0, "MEDIUM": 1, "LOW": 2, "INFO": 3}
     agg = {}
     for sev, label, f, n, ex in hits:

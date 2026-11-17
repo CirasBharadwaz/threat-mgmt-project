@@ -23,7 +23,8 @@ submission date) are placeholders to be completed before submission. Enter the v
 [`06-report/title-page.json`](06-report/title-page.json), then rebuild with
 `py tools\build_report.py --author "Bharadwaz Cirasanagandla"`.
 
-To replay the lab for screen recordings, follow the demo runbook: [`DEMO-RUNBOOK.md`](DEMO-RUNBOOK.md).
+To replay the lab for screen recordings, follow the demo runbook: [`DEMO-RUNBOOK.md`](DEMO-RUNBOOK.md)
+(one-page version: [`DEMO-CHEATSHEET.md`](DEMO-CHEATSHEET.md)).
 
 ## Phases
 

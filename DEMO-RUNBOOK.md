@@ -36,6 +36,17 @@ these container images:
 | ZAP baseline | about 6 min |
 | ZAP active scan of the login | about 15 min |
 
+## Before recording
+
+```powershell
+py tools\demo_reset.py       # removes leftover lab containers and networks; frees port 3000
+py tools\demo_preflight.py   # Docker, memory, disk, images, port 3000, Greenbone stopped
+```
+
+A one-page version of the scenes is in [`DEMO-CHEATSHEET.md`](DEMO-CHEATSHEET.md). To rehearse
+every scene automatically, with timings, run `py tools\demo_dryrun.py --scratch-copy --quick`
+in a throwaway copy of the project.
+
 ## Scene 1: start the lab, before the fix (about 2 min)
 
 ```powershell
@@ -52,7 +63,8 @@ Show http://127.0.0.1:3000 in the browser.
 
 ```powershell
 py tools\phase3_lab.py before nmap trivy zap-baseline
-py tools\phase3_lab.py before zap-active      # the slow part: record the start and the result only
+py tools\phase3_lab.py before zap-active-quick   # SQL injection rule only, a few minutes
+# (full scan: zap-active, about 15 min; record only its start and result)
 Get-Content evidence\phase3\before\zap-active-alerts.txt   # "SQL Injection ... param=email"
 ```
 
@@ -109,8 +121,7 @@ py tools\validate_phase6.py                    # runs the validators of every ph
 ## Clean up
 
 ```powershell
-docker rm -f shop-proxy app-patched juice-shop waf-test 2>$null
-docker network rm tm-lab tm-pub
+py tools\demo_reset.py
 ```
 
 **Greenbone** is not part of the recordings. Its containers are stopped but their data is kept; restart

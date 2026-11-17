@@ -4,7 +4,7 @@
 Run from the project root (PowerShell):
     py tools\\phase3_lab.py <stage> <step> [<step> ...]
     stage: before | after | options
-    steps: isolation nmap trivy zap-baseline zap-active sqli
+    steps: isolation nmap trivy zap-baseline zap-active zap-active-quick sqli fix-options
 Example:
     py tools\\phase3_lab.py before isolation nmap trivy zap-baseline zap-active sqli
 
@@ -15,6 +15,7 @@ Outputs go to evidence/phase3/<stage>/ with a run log (UTC timestamps).
 Standard library only; needs Docker.
 """
 import json
+import os
 import re
 import subprocess
 import sys
@@ -98,7 +99,8 @@ def step_nmap(run):
 def step_trivy(run):
     image = PATCHED_IMAGE if run.out.name == "after" else JUICE_IMAGE
     guard(image)
-    cache = ROOT.parent / ".trivy-cache"   # outside the repository
+    # outside the repository; TRIVY_CACHE lets a demo copy reuse an existing vulnerability database
+    cache = Path(os.environ["TRIVY_CACHE"]) if os.environ.get("TRIVY_CACHE") else ROOT.parent / ".trivy-cache"
     cache.mkdir(exist_ok=True)
     base = ["run", "--rm", "-v", "//var/run/docker.sock:/var/run/docker.sock",
             "-v", f"{cache}:/root/.cache", "-v", f"{run.out}:/out", TRIVY_IMAGE]
@@ -117,12 +119,18 @@ def step_zap_baseline(run):
                save_as="zap-baseline-console.txt")
 
 
-def step_zap_active(run):
+def step_zap_active(run, quick=False):
     guard(TARGET_URL)
     lab = ROOT / "03-vulnerability" / "lab"
     run.docker(["run", "--rm", "--network", LAB_NET, "-v", f"{run.out}:/zap/wrk:rw",
                 "-v", f"{lab}:/lab:ro", "--entrypoint", "python3", ZAP_IMAGE,
-                "/lab/zap_login_ascan.py", TARGET_URL], save_as="zap-active-console.txt")
+                "/lab/zap_login_ascan.py", TARGET_URL, *(["--quick"] if quick else [])],
+               save_as="zap-active-console.txt")
+
+
+def step_zap_active_quick(run):
+    """Demo variant: only the SQL injection rule (a few minutes instead of about 15)."""
+    step_zap_active(run, quick=True)
 
 
 def http(method, url, body=None, token=None):
@@ -207,7 +215,8 @@ def step_fix_options(run):
 
 
 STEPS = {"isolation": step_isolation, "nmap": step_nmap, "trivy": step_trivy,
-         "zap-baseline": step_zap_baseline, "zap-active": step_zap_active, "sqli": step_sqli,
+         "zap-baseline": step_zap_baseline, "zap-active": step_zap_active,
+         "zap-active-quick": step_zap_active_quick, "sqli": step_sqli,
          "fix-options": step_fix_options}
 
 
