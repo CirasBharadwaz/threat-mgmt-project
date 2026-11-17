@@ -1,0 +1,10 @@
+policy_id,title,owner,approver,applies_to,format,status,version,approved_on,next_review,file,changed_by
+POL-01,Information Security Policy,Information Security Officer,Managing Director,A-01;A-02;A-03;A-04;A-05;A-06;A-07;A-08,full,Approved,1.0,2026-11-16,2027-11-16,policies/POL-01-information-security-policy.md,-
+POL-02,Vulnerability and Patch Management Policy,Head of IT,Managing Director,A-01;A-02;A-03;A-04,full,Approved,1.0,2026-11-16,2027-11-16,policies/POL-02-vulnerability-patch-management-policy.md,-
+POL-03,Data Protection Policy,Managing Director,Managing Director,A-01;A-02;A-03;A-04;A-05;A-06;A-08,full,Approved,1.0,2026-11-16,2027-11-16,policies/POL-03-data-protection-policy.md,-
+POL-04,Access Control Policy,Head of IT,Managing Director,A-01;A-02;A-03;A-04;A-07,concise,Approved,1.1,2026-11-17,2027-11-16,policies/POL-04-access-control-policy.md,CA-24
+POL-05,Incident Response and Breach Notification Policy,Information Security Officer,Managing Director,A-01;A-02;A-03;A-04;A-05;A-06;A-07;A-08,full,Approved,1.1,2026-11-17,2027-11-16,policies/POL-05-incident-response-breach-notification-policy.md,CA-24;CA-25
+POL-06,Supplier Security Policy,Information Security Officer,Managing Director,A-05;A-06;A-08,concise,Approved,1.0,2026-11-16,2027-11-16,policies/POL-06-supplier-security-policy.md,-
+POL-07,Backup and Recovery Policy,Head of IT,Managing Director,A-02;A-03,one-page,Approved,1.0,2026-11-16,2027-11-16,policies/POL-07-backup-recovery-policy.md,-
+POL-08,Acceptable Use and Endpoint Policy,Head of IT,Managing Director,A-04,one-page,Approved,1.0,2026-11-16,2027-11-16,policies/POL-08-acceptable-use-endpoint-policy.md,-
+POL-09,Risk Management Policy,Information Security Officer,Managing Director,A-01;A-02;A-03;A-04;A-05;A-06;A-07;A-08,full,Approved,1.0,2026-11-16,2027-11-16,policies/POL-09-risk-management-policy.md,-

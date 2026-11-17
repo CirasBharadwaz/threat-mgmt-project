@@ -1,0 +1,111 @@
+policy_id,framework,reference,title
+POL-01,ISO/IEC 27001:2022,Clause 5.2,Policy
+POL-01,ISO/IEC 27001:2022,A.5.1,Policies for information security
+POL-01,ISO/IEC 27001:2022,A.5.2,Information security roles and responsibilities
+POL-01,ISO/IEC 27001:2022,A.5.4,Management responsibilities
+POL-01,ISO/IEC 27001:2022,A.5.9,Inventory of information and other associated assets
+POL-01,ISO/IEC 27001:2022,A.5.12,Classification of information
+POL-01,ISO/IEC 27001:2022,A.5.31,"Legal, statutory, regulatory and contractual requirements"
+POL-01,ISO/IEC 27001:2022,A.6.3,"Information security awareness, education and training"
+POL-01,NIST CSF 2.0,GV.PO,Policy
+POL-01,NIST CSF 2.0,GV.RR,"Roles, Responsibilities, and Authorities"
+POL-01,NIST CSF 2.0,GV.OC,Organizational Context
+POL-01,NIST CSF 2.0,GV.OV,Oversight
+POL-01,NIST CSF 2.0,ID.AM,Asset Management
+POL-01,NIST CSF 2.0,PR.AT,Awareness and Training
+POL-01,GDPR,Art. 24,Responsibility of the controller
+POL-01,GDPR,Art. 32,Security of processing
+POL-02,ISO/IEC 27001:2022,A.5.7,Threat intelligence
+POL-02,ISO/IEC 27001:2022,A.8.8,Management of technical vulnerabilities
+POL-02,ISO/IEC 27001:2022,A.8.9,Configuration management
+POL-02,ISO/IEC 27001:2022,A.8.25,Secure development life cycle
+POL-02,ISO/IEC 27001:2022,A.8.28,Secure coding
+POL-02,ISO/IEC 27001:2022,A.8.29,Security testing in development and acceptance
+POL-02,ISO/IEC 27001:2022,A.8.32,Change management
+POL-02,NIST CSF 2.0,ID.RA,Risk Assessment (ID.RA-01 vulnerabilities identified and recorded)
+POL-02,NIST CSF 2.0,PR.PS,Platform Security (PR.PS-02 software maintained commensurate with risk)
+POL-02,NIST CSF 2.0,ID.IM,Improvement
+POL-02,GDPR,Art. 25,Data protection by design and by default
+POL-02,GDPR,Art. 32,"Security of processing (32(1)(d) regular testing, assessing and evaluating)"
+POL-03,ISO/IEC 27001:2022,A.5.31,"Legal, statutory, regulatory and contractual requirements"
+POL-03,ISO/IEC 27001:2022,A.5.33,Protection of records
+POL-03,ISO/IEC 27001:2022,A.5.34,Privacy and protection of PII
+POL-03,ISO/IEC 27001:2022,A.8.10,Information deletion
+POL-03,NIST CSF 2.0,GV.OC,Organizational Context (legal and regulatory requirements)
+POL-03,NIST CSF 2.0,PR.DS,Data Security
+POL-03,GDPR,Art. 5,Principles relating to processing of personal data
+POL-03,GDPR,Art. 6,Lawfulness of processing
+POL-03,GDPR,Art. 7,Conditions for consent
+POL-03,GDPR,Art. 12,Transparent information and modalities for the exercise of rights
+POL-03,GDPR,Art. 13,Information to be provided where data are collected from the data subject
+POL-03,GDPR,Art. 15,Right of access (Art. 15 to 22 data subject rights)
+POL-03,GDPR,Art. 25,Data protection by design and by default
+POL-03,GDPR,Art. 30,Records of processing activities
+POL-03,GDPR,Art. 35,Data protection impact assessment
+POL-03,GDPR,Art. 37,Designation of the data protection officer (Art. 37 to 39)
+POL-03,BDSG,§ 38,Data protection officers of private bodies
+POL-03,TDDDG,§ 25,Protection of privacy in terminal equipment (cookies)
+POL-04,ISO/IEC 27001:2022,A.5.3,Segregation of duties
+POL-04,ISO/IEC 27001:2022,A.5.15,Access control
+POL-04,ISO/IEC 27001:2022,A.5.16,Identity management
+POL-04,ISO/IEC 27001:2022,A.5.17,Authentication information
+POL-04,ISO/IEC 27001:2022,A.5.18,Access rights
+POL-04,ISO/IEC 27001:2022,A.8.2,Privileged access rights
+POL-04,ISO/IEC 27001:2022,A.8.3,Information access restriction
+POL-04,ISO/IEC 27001:2022,A.8.5,Secure authentication
+POL-04,NIST CSF 2.0,PR.AA,"Identity Management, Authentication, and Access Control"
+POL-04,GDPR,Art. 5,Principles (5(1)(f) integrity and confidentiality)
+POL-04,GDPR,Art. 25,Data protection by default (25(2) access limited by default)
+POL-04,GDPR,Art. 32,Security of processing
+POL-05,ISO/IEC 27001:2022,A.5.5,Contact with authorities
+POL-05,ISO/IEC 27001:2022,A.5.24,Information security incident management planning and preparation
+POL-05,ISO/IEC 27001:2022,A.5.25,Assessment and decision on information security events
+POL-05,ISO/IEC 27001:2022,A.5.26,Response to information security incidents
+POL-05,ISO/IEC 27001:2022,A.5.27,Learning from information security incidents
+POL-05,ISO/IEC 27001:2022,A.5.28,Collection of evidence
+POL-05,ISO/IEC 27001:2022,A.6.8,Information security event reporting
+POL-05,ISO/IEC 27001:2022,A.8.15,Logging
+POL-05,ISO/IEC 27001:2022,A.8.16,Monitoring activities
+POL-05,NIST CSF 2.0,DE.CM,Continuous Monitoring
+POL-05,NIST CSF 2.0,DE.AE,Adverse Event Analysis
+POL-05,NIST CSF 2.0,RS.MA,Incident Management
+POL-05,NIST CSF 2.0,RS.AN,Incident Analysis
+POL-05,NIST CSF 2.0,RS.CO,Incident Response Reporting and Communication
+POL-05,NIST CSF 2.0,RS.MI,Incident Mitigation
+POL-05,NIST CSF 2.0,RC.RP,Incident Recovery Plan Execution
+POL-05,NIST CSF 2.0,RC.CO,Incident Recovery Communication
+POL-05,GDPR,Art. 4,Definitions (4(12) personal data breach)
+POL-05,GDPR,Art. 33,Notification of a personal data breach to the supervisory authority
+POL-05,GDPR,Art. 34,Communication of a personal data breach to the data subject
+POL-06,ISO/IEC 27001:2022,A.5.19,Information security in supplier relationships
+POL-06,ISO/IEC 27001:2022,A.5.20,Addressing information security within supplier agreements
+POL-06,ISO/IEC 27001:2022,A.5.21,Managing information security in the ICT supply chain
+POL-06,ISO/IEC 27001:2022,A.5.22,"Monitoring, review and change management of supplier services"
+POL-06,ISO/IEC 27001:2022,A.5.23,Information security for use of cloud services
+POL-06,NIST CSF 2.0,GV.SC,Cybersecurity Supply Chain Risk Management
+POL-06,GDPR,Art. 28,Processor
+POL-06,GDPR,Art. 44,General principle for transfers (Art. 44 to 46)
+POL-07,ISO/IEC 27001:2022,A.5.29,Information security during disruption
+POL-07,ISO/IEC 27001:2022,A.5.30,ICT readiness for business continuity
+POL-07,ISO/IEC 27001:2022,A.8.13,Information backup
+POL-07,ISO/IEC 27001:2022,A.8.14,Redundancy of information processing facilities
+POL-07,NIST CSF 2.0,PR.DS,"Data Security (PR.DS-11 backups created, protected, maintained and tested)"
+POL-07,NIST CSF 2.0,RC.RP,Incident Recovery Plan Execution
+POL-07,GDPR,Art. 32,"Security of processing (32(1)(b) resilience, 32(1)(c) timely restore)"
+POL-08,ISO/IEC 27001:2022,A.5.10,Acceptable use of information and other associated assets
+POL-08,ISO/IEC 27001:2022,A.6.7,Remote working
+POL-08,ISO/IEC 27001:2022,A.7.9,Security of assets off-premises
+POL-08,ISO/IEC 27001:2022,A.8.1,User endpoint devices
+POL-08,ISO/IEC 27001:2022,A.8.7,Protection against malware
+POL-08,NIST CSF 2.0,PR.PS,Platform Security
+POL-08,NIST CSF 2.0,PR.AT,Awareness and Training
+POL-08,GDPR,Art. 32,Security of processing
+POL-09,ISO/IEC 27001:2022,Clause 6.1.2,Information security risk assessment
+POL-09,ISO/IEC 27001:2022,Clause 6.1.3,Information security risk treatment
+POL-09,ISO/IEC 27001:2022,Clause 8.2,Information security risk assessment (operation)
+POL-09,ISO/IEC 27001:2022,Clause 8.3,Information security risk treatment (operation)
+POL-09,NIST CSF 2.0,GV.RM,Risk Management Strategy
+POL-09,NIST CSF 2.0,ID.RA,Risk Assessment
+POL-09,GDPR,Art. 24,Responsibility of the controller (risk-based)
+POL-09,GDPR,Art. 32,Security of processing (32(2) risk-based assessment)
+POL-09,GDPR,Art. 35,Data protection impact assessment
