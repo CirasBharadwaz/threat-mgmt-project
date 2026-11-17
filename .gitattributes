@@ -1,0 +1,6 @@
+# Keep LF line endings on every platform so the validators and build hashes work on a clean clone
+* text=auto eol=lf
+*.ps1 text eol=crlf
+*.png binary
+*.pdf binary
+*.docx binary

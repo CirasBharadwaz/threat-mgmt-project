@@ -188,11 +188,14 @@ def check_data(assets):
             elif did not in re.findall(r"D-\d{2}", assets[aid]["data_held"]):
                 fail(f"{did}: storage lists {aid}, but {aid} does not list {did} in data_held")
                 xref_errors += 1
-    # Cross-reference: asset data_held -> data inventory
+    # Cross-reference: asset data_held -> data inventory (both directions must agree)
     for aid, r in assets.items():
         for did in re.findall(r"D-\d{2}", r["data_held"]):
             if did not in data:
                 fail(f"{aid}: data_held references unknown data category {did}")
+                xref_errors += 1
+            elif aid not in re.findall(r"A-\d{2}", data[did]["storage"]):
+                fail(f"{aid}: data_held lists {did}, but {did} does not list {aid} in storage")
                 xref_errors += 1
     if not xref_errors and assets and data:
         ok("assets and data inventory cross-reference correctly")
