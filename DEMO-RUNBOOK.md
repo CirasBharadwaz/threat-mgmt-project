@@ -90,9 +90,10 @@ The proxy uses the Phase 3 configuration, which does not yet contain the INC-01 
 
 ```powershell
 docker rm -f juice-shop waf-test
-docker run -d --name shop-proxy --network tm-pub -p 127.0.0.1:3000:3000 `
+docker create --name shop-proxy --network tm-pub -p 127.0.0.1:3000:3000 `
   -v "${PWD}\03-vulnerability\lab\fix\nginx-hardening-phase3.conf:/etc/nginx/conf.d/default.conf:ro" nginx:1.27
 docker network connect --alias juice-shop tm-lab shop-proxy
+docker start shop-proxy   # start only after joining tm-lab, so nginx can resolve app-patched
 py tools\phase3_lab.py after isolation sqli zap-baseline    # same attack: HTTP 401 -> blocked
 ```
 

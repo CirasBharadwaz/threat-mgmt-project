@@ -76,11 +76,15 @@ def main():
         log(f"containment 1 (CA-23): {SUPPORT} password reset via the shop API -> HTTP {s2}; "
             "new password stored outside the repository")
     docker("rm", "-f", "shop-proxy")
-    r = docker("run", "-d", "--name", "shop-proxy", "--network", "tm-pub", "-p", "127.0.0.1:3000:3000",
+    # create, join both networks, THEN start: nginx resolves app-patched (on tm-lab) at startup
+    r = docker("create", "--name", "shop-proxy", "--network", "tm-pub", "-p", "127.0.0.1:3000:3000",
                "-v", f"{FINAL_CONF}:/etc/nginx/conf.d/default.conf:ro", "nginx:1.27")
     if r.returncode != 0:
         raise SystemExit(r.stderr)
     docker("network", "connect", "--alias", "juice-shop", "tm-lab", "shop-proxy")
+    r = docker("start", "shop-proxy")
+    if r.returncode != 0:
+        raise SystemExit(r.stderr)
     time.sleep(3)
     log("containment 2 (CA-22/CA-25): proxy recreated with nginx-hardening.conf; reading user data blocked, sign-up allowed")
     print("Next: py tools\\phase4_attack.py verify-containment")

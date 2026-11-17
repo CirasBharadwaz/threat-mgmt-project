@@ -36,3 +36,21 @@ from the project root.
 ## After recording
 
 `py tools\demo_reset.py` tears down the lab. Greenbone stays stopped, with its data kept.
+
+## Dry run results
+
+Run automatically with `py tools\demo_dryrun.py --scratch-copy --quick` in a scratch copy. The first
+attempt (19:48 UTC) failed at Scene 5: nginx was started before it joined `tm-lab` and could not resolve
+`app-patched`. The proxy is now created, connected and only then started. The second attempt passed:
+
+| Scene | Duration | Result | Key output |
+|---|---|---|---|
+| 1 Start the lab, before the fix | 0.1 min | OK | juice-shop:3000       REACHABLE; 1.1.1.1:443 (internet) blocked (OSError); host.docker.internal:3000 (host) blocked (gaierror);  |
+| 2 Find the vulnerabilities | 1.5 min | OK | SQL Injection found |
+| 3 Live attack, before the fix | 0.0 min | OK |   SQL injection login bypass: HTTP 200 -> BYPASS SUCCEEDED |
+| 4 Compare the fix options | 0.8 min | OK | control: 200, option A: 403, option B: 401 |
+| 5 Deploy the fix, same attack again | 0.5 min | OK |   SQL injection login bypass: HTTP 401 -> blocked |
+| 6 Incident INC-01 | 0.2 min | OK | 28 requests, 24 accounts; 3 High alerts; CONTAINED |
+| 7 Breach clock | 0.0 min | OK | breach clock exit 0 (milestones met) |
+
+Times are without narration and use the quick ZAP active scan; the full scan adds about 15 minutes.

@@ -81,9 +81,10 @@ def scene4():
 
 def scene5():
     sh("docker", "rm", "-f", "juice-shop", "waf-test", check=True)
-    sh("docker", "run", "-d", "--name", "shop-proxy", "--network", "tm-pub", "-p", "127.0.0.1:3000:3000",
+    sh("docker", "create", "--name", "shop-proxy", "--network", "tm-pub", "-p", "127.0.0.1:3000:3000",
        "-v", f"{FIX / 'nginx-hardening-phase3.conf'}:/etc/nginx/conf.d/default.conf:ro", "nginx:1.27", check=True)
     sh("docker", "network", "connect", "--alias", "juice-shop", "tm-lab", "shop-proxy", check=True)
+    sh("docker", "start", "shop-proxy", check=True)   # only after joining tm-lab
     if not wait_http("http://127.0.0.1:3000/"):
         raise RuntimeError("proxy did not come up")
     r = sh(PY, "tools/phase3_lab.py", "after", "isolation", "sqli", "zap-baseline", check=True)
