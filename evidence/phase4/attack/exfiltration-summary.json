@@ -1,0 +1,40 @@
+{
+  "incident": "INC-01",
+  "attack_start_utc": "2026-11-17T17:37:37Z",
+  "attack_end_utc": "2026-11-17T17:37:41Z",
+  "requests": 28,
+  "accounts_exposed": 24,
+  "fields_exposed": [
+    "createdAt",
+    "deletedAt",
+    "deluxeToken",
+    "email",
+    "id",
+    "isActive",
+    "lastLoginIp",
+    "lastLoginTime",
+    "password",
+    "profileImage",
+    "role",
+    "totpSecret",
+    "updatedAt",
+    "username"
+  ],
+  "roles_exposed": [
+    "accounting",
+    "admin",
+    "customer",
+    "deluxe"
+  ],
+  "password_field": "masked by the application (only asterisks)",
+  "totp_field": "masked or empty",
+  "last_login_ip_present": true,
+  "sample_masked": [
+    "ad***@juice-sh.op",
+    "ji***@juice-sh.op",
+    "be***@juice-sh.op",
+    "bj***@gmail.com",
+    "ci***@juice-sh.op"
+  ],
+  "note": "Synthetic lab data. Full responses are not stored; only this summary."
+}

@@ -1,0 +1,8 @@
+# INC-01 exercise log: response steps carried out by the incident lead (Information Security Officer role). Simulated (tabletop) steps are marked; times are real UTC clock times of the exercise.
+2026-11-17T17:39:18Z  triage: alerts 1-3 reviewed; app log confirms the same requests; support account used from one client; personal data (D-01, D-06) of all 24 lab accounts returned -> personal data breach confirmed (AWARENESS)
+2026-11-17T17:39:19Z  [simulated] Managing Director informed by phone (SEV-1, POL-05 statement 3); DPO informed
+2026-11-17T17:40:13Z  breach risk assessment completed with the DPO (04-incident/INC-01-breach-assessment.md): breach yes; risk (not high); SEV-1
+2026-11-17T17:40:13Z  [simulated] notification decision by the Managing Director: notify BlnBDI (Art. 33); inform customers voluntarily (Art. 34 content)
+2026-11-17T17:40:13Z  [simulated] Art. 33 notification submitted to the BlnBDI online form (04-incident/INC-01-art33-notification.md)
+2026-11-17T17:40:13Z  [simulated] customer notice sent by email and posted on the shop (04-incident/INC-01-art34-customer-notice.md)
+2026-11-17T17:40:56Z  [simulated] post-incident review held (04-incident/INC-01-post-incident-review.md)

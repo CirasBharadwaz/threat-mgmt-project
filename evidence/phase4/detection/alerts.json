@@ -1,0 +1,41 @@
+{
+  "detection_run_utc": "2026-11-17T17:37:55Z",
+  "events_parsed": 30,
+  "alerts": [
+    {
+      "rule": 1,
+      "severity": "High",
+      "title": "Admin user-data endpoints accessed",
+      "client": "172.24.0.1",
+      "first_event": "2026-11-17T17:37:38Z",
+      "last_event": "2026-11-17T17:37:41Z",
+      "count": 26,
+      "examples": [
+        "/api/Users",
+        "/api/Users/1",
+        "/api/Users/10",
+        "/api/Users/11",
+        "/api/Users/12"
+      ]
+    },
+    {
+      "rule": 2,
+      "severity": "High",
+      "title": "Enumeration burst (>= 20 API requests in 60 s)",
+      "client": "172.24.0.1",
+      "first_event": "2026-11-17T17:37:38Z",
+      "last_event": "2026-11-17T17:37:41Z",
+      "count": 28
+    },
+    {
+      "rule": 3,
+      "severity": "High",
+      "title": "Login followed by admin user-data access within 5 minutes (possible account takeover)",
+      "client": "172.24.0.1",
+      "first_event": "2026-11-17T17:37:38Z",
+      "last_event": "2026-11-17T17:37:41Z",
+      "count": 26,
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0 Safari/537.36"
+    }
+  ]
+}

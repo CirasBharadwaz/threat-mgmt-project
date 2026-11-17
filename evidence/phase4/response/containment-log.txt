@@ -1,0 +1,4 @@
+2026-11-17T17:38:22Z  containment 1 (CA-23): support@juice-sh.op password reset by the incident lead via the shop API -> HTTP 200; new password stored outside the repository
+2026-11-17T17:38:24Z  containment 2 (CA-22): proxy rule blocks /api/Users and /rest/user/authentication-details; nginx config tested and reloaded
+2026-11-17T17:38:27Z  containment verified: attacker replay (old password, admin endpoints) refused
+2026-11-17T18:10:28Z  containment 1 RE-APPLIED (CA-23): Docker restart at 18:04 UTC re-created the Juice Shop database and undid the reset; password reset again -> HTTP 200

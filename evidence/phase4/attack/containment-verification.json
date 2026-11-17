@@ -1,0 +1,24 @@
+{
+  "time_utc": "2026-11-17T17:38:27Z",
+  "contained": true,
+  "attempts": [
+    {
+      "time_utc": "2026-11-17T17:38:27Z",
+      "step": "replay: login with the phished password",
+      "request": "POST /rest/user/login",
+      "http_status": 401
+    },
+    {
+      "time_utc": "2026-11-17T17:38:27Z",
+      "step": "replay: admin data endpoint",
+      "request": "GET /api/Users",
+      "http_status": 403
+    },
+    {
+      "time_utc": "2026-11-17T17:38:27Z",
+      "step": "replay: admin data endpoint",
+      "request": "GET /rest/user/authentication-details/",
+      "http_status": 403
+    }
+  ]
+}

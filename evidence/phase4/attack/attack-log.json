@@ -1,0 +1,172 @@
+[
+  {
+    "time_utc": "2026-11-17T17:37:37Z",
+    "step": "1 login with phished support credentials",
+    "request": "POST /rest/user/login",
+    "http_status": 200
+  },
+  {
+    "time_utc": "2026-11-17T17:37:37Z",
+    "step": "2 check identity",
+    "request": "GET /rest/user/whoami",
+    "http_status": 200
+  },
+  {
+    "time_utc": "2026-11-17T17:37:37Z",
+    "step": "3 download user list",
+    "request": "GET /api/Users",
+    "http_status": 200,
+    "records": 24
+  },
+  {
+    "time_utc": "2026-11-17T17:37:37Z",
+    "step": "4 download authentication details",
+    "request": "GET /rest/user/authentication-details/",
+    "http_status": 200,
+    "records": 24
+  },
+  {
+    "time_utc": "2026-11-17T17:37:37Z",
+    "step": "5 enumerate single accounts",
+    "request": "GET /api/Users/1",
+    "http_status": 200
+  },
+  {
+    "time_utc": "2026-11-17T17:37:37Z",
+    "step": "5 enumerate single accounts",
+    "request": "GET /api/Users/2",
+    "http_status": 200
+  },
+  {
+    "time_utc": "2026-11-17T17:37:37Z",
+    "step": "5 enumerate single accounts",
+    "request": "GET /api/Users/3",
+    "http_status": 200
+  },
+  {
+    "time_utc": "2026-11-17T17:37:37Z",
+    "step": "5 enumerate single accounts",
+    "request": "GET /api/Users/4",
+    "http_status": 200
+  },
+  {
+    "time_utc": "2026-11-17T17:37:37Z",
+    "step": "5 enumerate single accounts",
+    "request": "GET /api/Users/5",
+    "http_status": 200
+  },
+  {
+    "time_utc": "2026-11-17T17:37:38Z",
+    "step": "5 enumerate single accounts",
+    "request": "GET /api/Users/6",
+    "http_status": 200
+  },
+  {
+    "time_utc": "2026-11-17T17:37:38Z",
+    "step": "5 enumerate single accounts",
+    "request": "GET /api/Users/7",
+    "http_status": 200
+  },
+  {
+    "time_utc": "2026-11-17T17:37:38Z",
+    "step": "5 enumerate single accounts",
+    "request": "GET /api/Users/8",
+    "http_status": 200
+  },
+  {
+    "time_utc": "2026-11-17T17:37:38Z",
+    "step": "5 enumerate single accounts",
+    "request": "GET /api/Users/9",
+    "http_status": 200
+  },
+  {
+    "time_utc": "2026-11-17T17:37:38Z",
+    "step": "5 enumerate single accounts",
+    "request": "GET /api/Users/10",
+    "http_status": 200
+  },
+  {
+    "time_utc": "2026-11-17T17:37:38Z",
+    "step": "5 enumerate single accounts",
+    "request": "GET /api/Users/11",
+    "http_status": 200
+  },
+  {
+    "time_utc": "2026-11-17T17:37:39Z",
+    "step": "5 enumerate single accounts",
+    "request": "GET /api/Users/12",
+    "http_status": 200
+  },
+  {
+    "time_utc": "2026-11-17T17:37:39Z",
+    "step": "5 enumerate single accounts",
+    "request": "GET /api/Users/13",
+    "http_status": 200
+  },
+  {
+    "time_utc": "2026-11-17T17:37:39Z",
+    "step": "5 enumerate single accounts",
+    "request": "GET /api/Users/15",
+    "http_status": 200
+  },
+  {
+    "time_utc": "2026-11-17T17:37:39Z",
+    "step": "5 enumerate single accounts",
+    "request": "GET /api/Users/16",
+    "http_status": 200
+  },
+  {
+    "time_utc": "2026-11-17T17:37:39Z",
+    "step": "5 enumerate single accounts",
+    "request": "GET /api/Users/17",
+    "http_status": 200
+  },
+  {
+    "time_utc": "2026-11-17T17:37:40Z",
+    "step": "5 enumerate single accounts",
+    "request": "GET /api/Users/18",
+    "http_status": 200
+  },
+  {
+    "time_utc": "2026-11-17T17:37:40Z",
+    "step": "5 enumerate single accounts",
+    "request": "GET /api/Users/19",
+    "http_status": 200
+  },
+  {
+    "time_utc": "2026-11-17T17:37:40Z",
+    "step": "5 enumerate single accounts",
+    "request": "GET /api/Users/20",
+    "http_status": 200
+  },
+  {
+    "time_utc": "2026-11-17T17:37:40Z",
+    "step": "5 enumerate single accounts",
+    "request": "GET /api/Users/21",
+    "http_status": 200
+  },
+  {
+    "time_utc": "2026-11-17T17:37:40Z",
+    "step": "5 enumerate single accounts",
+    "request": "GET /api/Users/22",
+    "http_status": 200
+  },
+  {
+    "time_utc": "2026-11-17T17:37:40Z",
+    "step": "5 enumerate single accounts",
+    "request": "GET /api/Users/23",
+    "http_status": 200
+  },
+  {
+    "time_utc": "2026-11-17T17:37:41Z",
+    "step": "5 enumerate single accounts",
+    "request": "GET /api/Users/24",
+    "http_status": 200
+  },
+  {
+    "time_utc": "2026-11-17T17:37:41Z",
+    "step": "5 enumerate single accounts",
+    "request": "GET /api/Users/25",
+    "http_status": 200
+  }
+]
