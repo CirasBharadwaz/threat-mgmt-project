@@ -111,6 +111,10 @@ def main():
         print(__doc__)
         print("Refusing to run without --scratch-copy: the dry run overwrites evidence\\ in this folder.")
         return 2
+    if (ROOT / ".git").exists():
+        print("Refusing to run: this folder is a git repository. The dry run overwrites evidence\\ and must run\n"
+              "in a plain copy without .git, e.g.:  robocopy . $HOME\\demo-copy /E /XD .git  then run it there.")
+        return 2
     quick = "--quick" in sys.argv
     sh(PY, "tools/demo_reset.py")
     scenes = [("1 Start the lab, before the fix", scene1), ("2 Find the vulnerabilities", lambda: scene2(quick)),

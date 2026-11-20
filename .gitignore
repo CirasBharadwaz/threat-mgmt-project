@@ -8,3 +8,7 @@ __pycache__/
 *.key
 *.pem
 *.zip
+
+# local files that must not be committed
+file-list.txt
+demo-dryrun-results.md

@@ -44,8 +44,14 @@ py tools\demo_preflight.py   # Docker, memory, disk, images, port 3000, Greenbon
 ```
 
 A one-page version of the scenes is in [`DEMO-CHEATSHEET.md`](DEMO-CHEATSHEET.md). To rehearse
-every scene automatically, with timings, run `py tools\demo_dryrun.py --scratch-copy --quick`
-in a throwaway copy of the project.
+every scene automatically, with timings, run the dry run in a plain copy without `.git`. The script
+refuses to run inside a git repository, because it overwrites `evidence\`:
+
+```powershell
+robocopy . $HOME\threat-mgmt-dryrun /E /XD .git
+cd $HOME\threat-mgmt-dryrun
+py tools\demo_dryrun.py --scratch-copy --quick
+```
 
 ## Scene 1: start the lab, before the fix (about 2 min)
 
