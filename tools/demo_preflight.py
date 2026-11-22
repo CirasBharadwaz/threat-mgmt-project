@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Preflight check before recording the demo (DEMO-RUNBOOK.md).
+"""Preflight check before starting the lab (see README.md).
 
 Run from the project root:
     py tools\\demo_preflight.py
@@ -51,14 +51,14 @@ def main():
     left = [c for c in LAB_CONTAINERS if c in running]
     nets = [n for n in LAB_NETWORKS if n in docker("network", "ls", "--format", "{{.Name}}").stdout.split()]
     add("OK" if not left and not nets else "WARN",
-        "no leftover lab containers or networks (ready for Scene 1)" if not left and not nets else
+        "no leftover lab containers or networks (ready to start the lab)" if not left and not nets else
         f"leftovers from an earlier run: containers {left}, networks {nets}; run py tools\\demo_reset.py")
     s = socket.socket()
     s.settimeout(1)
     busy = s.connect_ex(("127.0.0.1", 3000)) == 0
     s.close()
     add("OK" if not busy else "WARN", "port 127.0.0.1:3000 free" if not busy else
-        "port 127.0.0.1:3000 in use; run py tools\\demo_reset.py before Scene 1")
+        "port 127.0.0.1:3000 in use; run py tools\\demo_reset.py before starting the lab")
     gb_up = [n for n in docker("ps", "--format", "{{.Names}}").stdout.split() if n.startswith("greenbone")]
     add("OK" if not gb_up else "WARN", "Greenbone stopped (frees memory)" if not gb_up else
         f"{len(gb_up)} Greenbone containers running; stop them before recording")

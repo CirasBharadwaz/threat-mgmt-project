@@ -6,7 +6,9 @@ Run from the project root:
 Scans every file in the working tree (not .git), the text inside the DOCX, and the
 git history (commit metadata and committed file contents). Known secret values that
 were set during the project are read from files OUTSIDE the repository and compared
-without printing them. Every hit is shown with file, line and a masked excerpt.
+without printing them. E-mail addresses inside raw Trivy output (evidence/.../trivy.json) are
+public package-maintainer addresses and are reported as INFO. Every hit is shown with file,
+line and a masked excerpt.
 Exit code 1 if a HIGH finding exists. Standard library only.
 """
 import ipaddress
@@ -19,15 +21,21 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 OUTSIDE = {  # files outside the repo that hold secrets set during the project
     "Greenbone admin password": (Path.home() / "greenbone-community-container" / "admin-password.txt", r"^password: (\S+)"),
+    # lines like "... password: X", "re-applied <ISO time>: X", "reset <ISO time>: X" (the time has colons)
     "support account reset password": (Path.home() / "threat-lab-secrets" / "support-account-reset.txt",
-                                       r"(?:password|applied [^:]+|reset [^:]+): (\S+)"),
+                                       r"^(?:.*\bpassword|(?:re-)?applied \S+|reset \S+): (\S+)\s*$"),
 }
+# Raw Trivy output lists public package-maintainer and mailing-list addresses from vulnerability databases
+TRIVY_OUTPUT = re.compile(r"^evidence/.+/trivy\.json$")
 PUBLIC_LAB_CREDENTIALS = {  # published Juice Shop demo credentials (synthetic)
     "J6aVjTgOpRs@?5l!Zkq2AYnCE@RF$P": "Juice Shop support@juice-sh.op demo password",
     "ncc-1701": "Juice Shop jim@juice-sh.op demo password",
 }
 SYNTHETIC_MAIL = re.compile(r"@(juice-sh\.op|[\w.-]*\.invalid|[\w.-]*\.example|example\.(com|org)|owasp\.org)$", re.I)
 PATTERNS = [
+    # a quoted literal assigned to a password-like name, also with a prefix or suffix (ADMIN_PASSWORD = "...")
+    ("HIGH", "hard-coded password (string literal)", re.compile(
+        r"""(?i)\b\w*(?:password|passwd|pwd|secret|api[_-]?key)\w*["']?\s*[:=]\s*(["'])(?![<${%])([^"'\s]{6,})\1""")),
     ("HIGH", "JWT (complete token)", re.compile(r"eyJ[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{8,}")),
     ("LOW", "JWT fragment (header only)", re.compile(r"eyJ[A-Za-z0-9_-]{8,}(?!\.[A-Za-z0-9_-]{8,}\.)")),
     ("HIGH", "Bearer token", re.compile(r"Bearer\s+[A-Za-z0-9._-]{20,}")),
@@ -80,7 +88,8 @@ def text_of(p):
         return None
 
 
-def scan_text(name, text, secrets, hits):
+def scan_text(name, text, secrets, hits, path=""):
+    trivy = bool(TRIVY_OUTPUT.search(path))
     for n, line in enumerate(text.splitlines(), 1):
         for label, vals in secrets.items():
             for v in vals:
@@ -92,13 +101,16 @@ def scan_text(name, text, secrets, hits):
         for sev, label, rx in PATTERNS:
             for m in rx.finditer(line):
                 val = m.group(0)
-                if label == "password/secret assignment" and any(v in val for v in PUBLIC_LAB_CREDENTIALS):
+                if label in ("password/secret assignment", "hard-coded password (string literal)") and \
+                        any(v in val for v in PUBLIC_LAB_CREDENTIALS):
                     continue
                 hits.append((sev, label, name, n, mask(val) if sev != "INFO" else val.strip()))
         for m in EMAIL.finditer(line):
             mail = m.group(0)
             if SYNTHETIC_MAIL.search(mail):
                 hits.append(("INFO", "synthetic e-mail address", name, n, mail))
+            elif trivy:
+                hits.append(("INFO", "public maintainer e-mail (Trivy output, known)", name, n, mail))
             else:
                 hits.append(("HIGH", "real-looking e-mail address", name, n, mail))
         for m in IPV4.finditer(line):
@@ -118,7 +130,8 @@ def main():
     for p in files():
         t = text_of(p)
         if t:
-            scan_text(p.relative_to(ROOT).as_posix(), t, secrets, hits)
+            rel = p.relative_to(ROOT).as_posix()
+            scan_text(rel, t, secrets, hits, rel)
     # git history: commit metadata and committed content
     meta = subprocess.run(["git", "log", "--all", "--format=%h author=%an <%ae> committer=%cn <%ce>"],
                           capture_output=True, text=True, cwd=ROOT).stdout
@@ -129,7 +142,9 @@ def main():
     hist = subprocess.run(["git", "log", "--all", "-p", "--format=COMMIT %h"], capture_output=True, text=True,
                           encoding="utf-8", errors="replace", cwd=ROOT).stdout
     before = len(hits)
-    scan_text("git history (committed content)", hist, secrets, hits)
+    for chunk in re.split(r"^(?=diff --git )", hist, flags=re.M):  # one chunk per file per commit
+        m = re.match(r"diff --git a/(\S+)", chunk)
+        scan_text("git history (committed content)", chunk, secrets, hits, m.group(1) if m else "")
     hist_hits = hits[before:]
     # report only history findings that are NOT also in the current files (committed copies of
     # current content would otherwise be counted twice); these are values that exist only in history

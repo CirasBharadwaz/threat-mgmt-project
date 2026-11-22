@@ -1,7 +1,0 @@
-data_id,data_category,examples,data_subjects,purpose,legal_basis,storage,access_roles,retention,recipients,sensitivity
-D-01,Customer identity,"name, email, phone",Customers,Order fulfilment,Contract (Art. 6(1)(b)),A-01;A-02;A-03;A-04;A-08,"Support, IT",6 years after last order,Delivery partner,Medium
-D-02,Delivery address,"street, city, postcode",Customers,Shipping,Contract (Art. 6(1)(b)),A-01;A-02;A-03;A-04;A-08,"Support, Logistics",6 years after last order,Delivery partner,Medium
-D-03,Payment reference,"tokenised card reference, transaction ID",Customers,Payment processing,Contract (Art. 6(1)(b)),A-01;A-02;A-03;A-05,Finance,"8 years (accounting vouchers, § 257 HGB, § 147 AO, as amended by BEG IV, effective 1 Jan 2025)",Payment provider,High
-D-04,Account credentials,"email, password hash",Customers,Account login,Contract (Art. 6(1)(b)),A-01;A-02;A-03,IT admins,Until account deletion,None,High
-D-05,Marketing consent,"newsletter opt-in, timestamp",Customers,Newsletter,Consent (Art. 6(1)(a)),A-06,Marketing,Until consent withdrawn,Email provider,Low
-D-06,Server access logs,"IP address, timestamp, requested URL, user agent",Customers and visitors,Security monitoring and incident detection,Legitimate interests (Art. 6(1)(f)),A-01,IT admins,90 days,None,Medium

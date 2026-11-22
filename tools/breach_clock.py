@@ -3,7 +3,7 @@
 
 Live use, from the moment of awareness:
     py tools\\breach_clock.py --aware 2026-11-17T18:40:00Z
-Check a documented incident (reads 04-incident/<INC>-timeline.csv):
+Check a documented incident (event times in TIMELINES below):
     py tools\\breach_clock.py --inc INC-01
 
 Milestones (POL-05):
@@ -14,12 +14,24 @@ Exit code 1 if a documented milestone was missed or the 72 h deadline has passed
 without a notification. Standard library only.
 """
 import argparse
-import csv
 import sys
 from datetime import datetime, timedelta, timezone
-from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+# Event times (UTC) of documented incidents, taken from the evidence:
+#   attack-start  evidence/phase4/attack/attack-log.json (first request)
+#   detection     evidence/phase4/detection/alerts.json (detection_run_utc)
+#   all others    evidence/phase4/response/exercise-log.txt
+TIMELINES = {
+    "INC-01": [
+        ("attack-start", "2026-11-17T17:37:37Z"),
+        ("detection", "2026-11-17T17:37:55Z"),
+        ("awareness", "2026-11-17T17:39:18Z"),
+        ("md-informed", "2026-11-17T17:39:19Z"),
+        ("risk-assessed", "2026-11-17T17:40:13Z"),
+        ("notification-decision", "2026-11-17T17:40:13Z"),
+        ("authority-notified", "2026-11-17T17:40:13Z"),
+    ],
+}
 MILESTONES = [
     ("md-informed", timedelta(hours=1), "Managing Director informed (POL-05, SEV-1)"),
     ("risk-assessed", timedelta(hours=24), "Breach risk assessment done (POL-05 statement 5)"),
@@ -40,11 +52,9 @@ def hours(td):
 
 
 def load_timeline(inc):
-    path = ROOT / "04-incident" / f"{inc}-timeline.csv"
-    if not path.is_file():
-        raise SystemExit(f"Timeline not found: {path}")
-    with path.open(newline="", encoding="utf-8") as fh:
-        return list(csv.DictReader(fh))
+    if inc not in TIMELINES:
+        raise SystemExit(f"No timeline for {inc}; known incidents: {', '.join(TIMELINES)}")
+    return [{"event_type": kind, "time_utc": ts} for kind, ts in TIMELINES[inc]]
 
 
 def first(events, kind):
@@ -89,7 +99,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     g = ap.add_mutually_exclusive_group(required=True)
     g.add_argument("--aware", help="awareness time, ISO 8601 (for example 2026-11-17T18:40:00Z)")
-    g.add_argument("--inc", help="incident ID with a timeline file, for example INC-01")
+    g.add_argument("--inc", help="incident ID with a timeline in TIMELINES, for example INC-01")
     ap.add_argument("--now", help="evaluate at this time instead of the current time (ISO 8601)")
     args = ap.parse_args()
     now = parse(args.now) if args.now else None

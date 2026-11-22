@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""Reset the lab to a clean slate before recording Scene 1 of DEMO-RUNBOOK.md.
+"""Reset the lab to a clean slate before starting the lab (see README.md).
 
 Run from the project root:
     py tools\\demo_reset.py
 Removes the lab containers (juice-shop, app-patched, waf-test, shop-proxy) and the lab
 networks (tm-lab, tm-pub). Images, the Trivy cache and Greenbone (its containers and data)
-are NOT touched. Afterwards port 127.0.0.1:3000 is free and Scene 1 can start.
+are NOT touched. Afterwards port 127.0.0.1:3000 is free and the lab can start.
 Note: Juice Shop recreates its database at every start, so the published demo
-credentials work again after a reset (this is needed for Scene 6).
+credentials work again after a reset (this is needed for incident INC-01).
 Standard library only; needs Docker.
 """
 import socket
@@ -40,7 +40,7 @@ def main():
     s.settimeout(1)
     busy = s.connect_ex(("127.0.0.1", 3000)) == 0
     s.close()
-    print("port 127.0.0.1:3000 is free; ready for Scene 1" if not busy else "WARNING: port 3000 is still in use")
+    print("port 127.0.0.1:3000 is free; ready to start the lab" if not busy else "WARNING: port 3000 is still in use")
     return 1 if busy else 0
 
 
