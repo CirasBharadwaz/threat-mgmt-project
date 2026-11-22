@@ -22,6 +22,8 @@ Governance, Risk Assessment, Vulnerability Assessment, Remediation Plan, Inciden
 
 Lab passwords are never stored in this repository: the Greenbone admin password is read from ~\greenbone-community-container\admin-password.txt and the containment script writes the new random support password to ~\threat-lab-secrets\.
 
+Lab target: OWASP Juice Shop (bkimminich/juice-shop), MIT licence. The patched login in 03-vulnerability/lab/fix/ keeps its MIT notice.
+
 ## Run order
 
 The scripts overwrite `evidence\`, so run them in a separate clone:
