@@ -1,13 +1,15 @@
 # ShopNova Cyber Threat Management: lab code and evidence
 
-This repository holds only the lab code of the ShopNova Cyber Threat Management project and the evidence
-its runs produced. All explanations are in the project documents: Project Structure, Project Flow,
-Governance, Risk Assessment, Vulnerability Assessment, Remediation Plan, Incident Response and Process Review.
+This repository holds the lab code of the ShopNova Cyber Threat Management project, the evidence its runs
+produced, and the project documents as PDFs in `documents/`: Project Structure, Project Flow, Governance,
+Risk Assessment, Vulnerability Assessment, Remediation Plan, Incident Response and Process Review.
+All explanations are in those documents; the code folders hold only what runs.
 
 ## What is here
 
 | Folder | Contents |
 |---|---|
+| `documents/` | The 8 project documents (PDF), one folder each, numbered in reading order: `01-project-structure` to `08-process-review` |
 | `03-vulnerability/lab/` | Lab topology and commands (`README.md`); targeted ZAP scan of the login (`zap_login_ascan.py`) |
 | `03-vulnerability/lab/fix/` | The fixes: patched login route, Dockerfile of the patched image, nginx hardening configurations |
 | `tools/` | Lab scripts: reset, preflight, scans, attack, detection, containment, breach clock, Greenbone scan, secrets scan |
